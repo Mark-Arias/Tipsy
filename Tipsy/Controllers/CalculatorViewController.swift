@@ -38,7 +38,17 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "goToResultsVC", sender: self)
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "goToResultsVC" {   // set what to prepare for based on id match
+            // let destinationVC = segue.destination as! ResultsViewController
+            // set the properties of the new vc here
+        }
     }
     
     
