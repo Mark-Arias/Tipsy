@@ -12,7 +12,7 @@ class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var billTextField: UITextField!
     
-    @IBOutlet weak var zerPctButton: UIButton!
+    @IBOutlet weak var zeroPctButton: UIButton!
     
     @IBOutlet weak var tenPctButton: UIButton!
     
@@ -20,17 +20,38 @@ class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var splitNumberLabel: UILabel!
     
-    
+    var userPercentTipSelection = 0.0
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        zeroPctButton.isSelected = false
+        tenPctButton.isSelected = false
+        twentyPctButton.isSelected = false
     }
     
     
     @IBAction func tipChanged(_ sender: UIButton) {
-        
+        if sender.titleLabel?.text == "0%" {
+            userPercentTipSelection = 0.0
+            
+            zeroPctButton.isSelected = true
+            tenPctButton.isSelected = false
+            twentyPctButton.isSelected = false
+        } else if sender.titleLabel?.text == "10%" {
+            userPercentTipSelection = 0.1
+            
+            zeroPctButton.isSelected = false
+            tenPctButton.isSelected = true
+            twentyPctButton.isSelected = false
+        } else if sender.titleLabel?.text == "20%" {
+            userPercentTipSelection = 0.2
+            
+            zeroPctButton.isSelected = false
+            tenPctButton.isSelected = false
+            twentyPctButton.isSelected = true
+        }
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
@@ -38,7 +59,10 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "goToResultsVC", sender: self)
+        print(userPercentTipSelection)
+        
+        // modally present resutlts vc
+        // self.performSegue(withIdentifier: "goToResultsVC", sender: self)
         
     }
     

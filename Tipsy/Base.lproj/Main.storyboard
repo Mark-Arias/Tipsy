@@ -203,7 +203,7 @@
                         <outlet property="splitNumberLabel" destination="bSy-Yc-886" id="ldO-cv-jNc"/>
                         <outlet property="tenPctButton" destination="7y6-Kf-yF0" id="tCb-rw-745"/>
                         <outlet property="twentyPctButton" destination="UtR-dU-EKt" id="dW2-Iv-bH6"/>
-                        <outlet property="zerPctButton" destination="XzR-0E-Xf7" id="e1j-m7-ybM"/>
+                        <outlet property="zeroPctButton" destination="XzR-0E-Xf7" id="774-Fd-00d"/>
                         <segue destination="Dnf-m2-FPm" kind="presentation" identifier="goToResultsVC" id="w8x-DM-cMX"/>
                     </connections>
                 </viewController>
