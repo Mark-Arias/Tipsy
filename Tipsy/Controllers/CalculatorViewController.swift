@@ -21,6 +21,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var splitNumberLabel: UILabel!
     
     var userPercentTipSelection = 0.0
+    var userSelectedSplit = 0
     
 
     override func viewDidLoad() {
@@ -55,11 +56,16 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
+        sender.minimumValue = 1
+        sender.maximumValue = 6
+        userSelectedSplit = Int(sender.value)
+        splitNumberLabel.text = String(format: "%.0f", sender.value)
         
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
         print(userPercentTipSelection)
+        print(userSelectedSplit)
         
         // modally present resutlts vc
         // self.performSegue(withIdentifier: "goToResultsVC", sender: self)
