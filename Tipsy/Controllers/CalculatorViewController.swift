@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
+class CalculatorViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var billTextField: UITextField!
     
@@ -22,11 +22,20 @@ class CalculatorViewController: UIViewController {
     
     var userPercentTipSelection = 0.0
     var userSelectedSplit = 0
+    var userBillTotal = 0.0
+    
+    var calculatedTip = 0.0
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        billTextField.delegate = self
+        
+        if let splitNum = Int(splitNumberLabel.text!) {
+            userSelectedSplit = splitNum
+        }
+        
         zeroPctButton.isSelected = false
         tenPctButton.isSelected = false
         twentyPctButton.isSelected = false
@@ -34,6 +43,8 @@ class CalculatorViewController: UIViewController {
     
     
     @IBAction func tipChanged(_ sender: UIButton) {
+        billTextField.endEditing(true)
+        
         if sender.titleLabel?.text == "0%" {
             userPercentTipSelection = 0.0
             
@@ -66,10 +77,25 @@ class CalculatorViewController: UIViewController {
     @IBAction func calculatePressed(_ sender: UIButton) {
         print(userPercentTipSelection)
         print(userSelectedSplit)
+        if let billTotal = Double(billTextField.text!) {
+            userBillTotal = billTotal
+        }
+        print(userBillTotal)
+        
+        calculateTip()
+        
+        print("Calculated tip:")
+        print(calculatedTip)
+        
+        billTextField.resignFirstResponder()
         
         // modally present resutlts vc
         // self.performSegue(withIdentifier: "goToResultsVC", sender: self)
         
+    }
+    
+    func calculateTip() {
+        calculatedTip = userBillTotal * userPercentTipSelection / Double(userSelectedSplit)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
